@@ -15,7 +15,6 @@ const useRequestGetTodoList = () => {
          setTodoList(loadedTodoList || {});
 
          setIsLoading(false);
-         console.log(loadedTodoList);
       });
    }, []);
 

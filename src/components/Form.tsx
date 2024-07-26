@@ -18,7 +18,7 @@ const Form = ({ addTodo }: FormProps) => {
    };
 
    return (
-      <form className="mb-4 w-full" onSubmit={handleSubmit}>
+      <form className="grid grid-cols-2 gap-10 mb-4" onSubmit={handleSubmit}>
          <input
             type="text"
             className="outline-none bg-transparent border border-gray-500 p-4 w-[300px] text-black  rounded placeholder:text-gray-300"

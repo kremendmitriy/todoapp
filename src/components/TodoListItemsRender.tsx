@@ -1,5 +1,4 @@
 import Todo from './Todo';
-import Edit from './Edit';
 import Search from './Search';
 import Sort from './Sort';
 import '../styles/loader.css';
@@ -7,14 +6,12 @@ import '../styles/loader.css';
 import { Todo as TodoType } from '../types';
 import { useState } from 'react';
 
-import UseRequestEditTodo from '../hooks/use-request-edit-todo';
 import UseRequestDeleteTodo from '../hooks/use-request-delete-todo';
 import useRequestGetTodoList from '../hooks/use-request-get-todoList';
 import UseRequestSearchTodo from '../hooks/use-request-search-todo';
 import useRequestSortTodo from '../hooks/use-request-sort-todo';
 
 const TodoListItemsRender = () => {
-   const { editTodo } = UseRequestEditTodo();
    const { deleteTodo } = UseRequestDeleteTodo();
    const { todoList, isLoading } = useRequestGetTodoList();
    const { findTodo, searchResult } = UseRequestSearchTodo();
@@ -32,7 +29,7 @@ const TodoListItemsRender = () => {
 
    return (
       <div>
-         <div className="flex mb-6">
+         <div className="grid grid-cols-2 mb-6">
             <Search findTodo={handleSearch} />
             <Sort onSortChange={setSortOption} />
          </div>
@@ -52,13 +49,10 @@ const TodoListItemsRender = () => {
                   'todo' in todo
                ) {
                   const typedTodo = todo as TodoType;
-                  return typedTodo.isEdit ? (
-                     <Edit key={id} todo={{ ...typedTodo, id }} />
-                  ) : (
+                  return (
                      <Todo
                         key={id}
                         todo={{ ...typedTodo, id }}
-                        editTodo={editTodo}
                         deleteTodo={deleteTodo}
                      />
                   );

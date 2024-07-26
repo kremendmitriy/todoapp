@@ -9,16 +9,14 @@ const Search = ({ findTodo }: SearchProps) => {
 
    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      if (!value.trim()) {
-         return;
-      }
+
       findTodo(value);
 
       setValue('');
    };
 
    return (
-      <form className="mb-4" onSubmit={handleSubmit}>
+      <form className="flex mb-4" onSubmit={handleSubmit}>
          <input
             type="text"
             className="outline-none bg-transparent border border-gray-500 p-1 w-[150px] text-black  rounded placeholder:text-gray-300"

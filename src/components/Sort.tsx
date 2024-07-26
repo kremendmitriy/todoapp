@@ -18,7 +18,7 @@ const Sort: React.FC<SortProps> = ({ onSortChange }) => {
    return (
       <div>
          <Select
-            className="ml-2 p-0 w-[167px]"
+            className="ml-2 p-0 w-[96%]"
             styles={customStyles}
             options={noteOptions}
             onChange={(selectedOption) => {

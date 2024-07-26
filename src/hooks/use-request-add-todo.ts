@@ -4,7 +4,7 @@ import { db } from '../firebase';
 import { ref, push } from 'firebase/database';
 
 const UseRequestAddTodo = () => {
-   const [isCreating, setIsCreating] = useState(false);
+   const [isCreating, setIsCreating] = useState<boolean>(false);
 
    const addTodo = async (todo: string) => {
       setIsCreating(true);
@@ -14,6 +14,7 @@ const UseRequestAddTodo = () => {
          await push(todoDbRef, {
             id: uuidv4(),
             todo,
+            description: '',
             isEdit: false,
          });
       } catch (error) {

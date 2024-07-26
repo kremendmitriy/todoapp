@@ -6,9 +6,11 @@ const TodoList: React.FC = () => {
    const { addTodo } = UseRequestAddTodo();
 
    return (
-      <div className="bg-yellow-50 mt-20 p-8 rounded-md">
-         <Form addTodo={addTodo} />
-         <TodoListItemsRender />
+      <div className="flex justify-center items-center m-auto mt-36   rounded-md">
+         <div className="bg-slate-200 w-[500px] h-[600px] overflow-auto m-4 p-4 rounded-md border-solid border-black border-2">
+            <Form addTodo={addTodo} />
+            <TodoListItemsRender />
+         </div>
       </div>
    );
 };

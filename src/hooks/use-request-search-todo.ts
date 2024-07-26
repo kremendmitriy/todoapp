@@ -10,9 +10,8 @@ const UseRequestSearchTodo = () => {
    const [searchResult, setSearchResult] = useState({});
 
    const findTodo = (value: string) => {
+      !value ? setSearchResult(todoList) : null;
       const filteredNotes = Object.entries(todoList).filter(([_, todo]) => {
-         console.log(todo.todo.toLowerCase().includes(value.toLowerCase()));
-
          return todo.todo.toLowerCase().includes(value.toLowerCase());
       });
       setSearchResult(Object.fromEntries(filteredNotes));
