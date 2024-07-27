@@ -2,7 +2,7 @@ import { db } from '../firebase';
 import { ref, remove } from 'firebase/database';
 import { useState } from 'react';
 
-const UseRequestDeleteTodo = () => {
+const useRequestDeleteTodo = () => {
    const [isDelete, setIsDelete] = useState<boolean>(false);
 
    const deleteTodo = async (id: string) => {
@@ -20,4 +20,4 @@ const UseRequestDeleteTodo = () => {
    return { deleteTodo, isDelete };
 };
 
-export default UseRequestDeleteTodo;
+export default useRequestDeleteTodo;

@@ -2,11 +2,11 @@ import Select from 'react-select';
 import customStyles from '../styles/selector';
 
 type SortProps = {
-   onSortChange: (option: string) => void;
+   onSortChange: (option: 'a-z' | 'z-a') => void;
 };
 
 type OptionType = {
-   value: string;
+   value: 'a-z' | 'z-a';
    label: string;
 };
 

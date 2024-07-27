@@ -4,7 +4,7 @@ interface SearchProps {
    findTodo: (value: string) => void;
 }
 
-const Search = ({ findTodo }: SearchProps) => {
+const Search: React.FC<SearchProps> = ({ findTodo }) => {
    const [value, setValue] = useState<string>('');
 
    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

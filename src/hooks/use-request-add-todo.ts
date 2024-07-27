@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { db } from '../firebase';
 import { ref, push } from 'firebase/database';
 
-const UseRequestAddTodo = () => {
+const useRequestAddTodo = () => {
    const [isCreating, setIsCreating] = useState<boolean>(false);
 
    const addTodo = async (todo: string) => {
@@ -15,7 +15,6 @@ const UseRequestAddTodo = () => {
             id: uuidv4(),
             todo,
             description: '',
-            isEdit: false,
          });
       } catch (error) {
          console.error('Error adding todo: ', error);
@@ -29,4 +28,4 @@ const UseRequestAddTodo = () => {
    };
 };
 
-export default UseRequestAddTodo;
+export default useRequestAddTodo;

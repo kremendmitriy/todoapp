@@ -4,7 +4,7 @@ interface FormProps {
    addTodo: (todo: string) => void;
 }
 
-const Form = ({ addTodo }: FormProps) => {
+const Form: React.FC<FormProps> = ({ addTodo }) => {
    const [value, setValue] = useState<string>('');
 
    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

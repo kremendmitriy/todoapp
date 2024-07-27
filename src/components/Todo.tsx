@@ -2,6 +2,7 @@ import { AiFillEdit } from 'react-icons/ai';
 import { AiFillDelete } from 'react-icons/ai';
 import { Todo as TodoType } from '../types';
 import { useNavigate } from 'react-router-dom';
+import { useCallback } from 'react';
 
 interface TodoProps {
    todo: TodoType;
@@ -11,12 +12,21 @@ interface TodoProps {
 const Todo: React.FC<TodoProps> = ({ todo, deleteTodo }) => {
    const navigate = useNavigate();
 
-   const descriptionView = () => {
+   const descriptionView = useCallback(() => {
       if (!todo.description) return '';
-      if (todo.description.length > 60) {
-         return todo.description.slice(0, 60) + '...';
-      } else return todo.description;
-   };
+      return todo.description.length > 60
+         ? `${todo.description.slice(0, 60)}...`
+         : todo.description;
+   }, [todo.description]);
+
+   const handleEditClick = useCallback(() => {
+      navigate(`/todo/${todo.id}`, { state: { todo } });
+   }, [navigate, todo]);
+
+   const handleDeleteClick = useCallback(() => {
+      deleteTodo(todo.id);
+   }, [deleteTodo, todo.id]);
+
    return (
       <div className="bg-gray-700 text-white py-3 px-4 rounded-md mb-1">
          <div className="flex flex-col">
@@ -25,13 +35,11 @@ const Todo: React.FC<TodoProps> = ({ todo, deleteTodo }) => {
                <div className="flex items-center gap-x-4">
                   <AiFillEdit
                      className="text-xl cursor-pointer"
-                     onClick={() => {
-                        navigate(`/todo/${todo.id}`, { state: { todo } });
-                     }}
+                     onClick={handleEditClick}
                   />
                   <AiFillDelete
                      className="text-xl cursor-pointer"
-                     onClick={() => deleteTodo(todo.id)}
+                     onClick={handleDeleteClick}
                   />
                </div>
             </div>

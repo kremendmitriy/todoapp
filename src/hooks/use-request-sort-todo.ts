@@ -7,8 +7,8 @@ const useRequestSortTodo = (
    todos: Record<string, TodoType>,
    sortOption: SortOption
 ) => {
-   const [sortedTodos, setSortedTodos] = useState({});
-   // ADD DATE AND SORT WITH DATE
+   const [sortedTodos, setSortedTodos] = useState<[string, TodoType][]>([]);
+
    useEffect(() => {
       const sortTodos = () => {
          const entries = Object.entries(todos);

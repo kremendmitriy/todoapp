@@ -10,12 +10,16 @@ const useRequestGetTodoList = () => {
    useEffect(() => {
       const todoListDbRef = ref(db, 'todoList');
 
-      return onValue(todoListDbRef, (snapshot) => {
+      const unsubscribe = onValue(todoListDbRef, (snapshot) => {
          const loadedTodoList = snapshot.val();
          setTodoList(loadedTodoList || {});
 
          setIsLoading(false);
       });
+
+      return () => {
+         unsubscribe();
+      };
    }, []);
 
    return {

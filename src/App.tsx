@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
 import TodoList from './components/TodoList';
-import TodoDescrption from './components/TodoDescrption';
+import TodoEditing from './components/TodoEditing';
 import NotFound from './components/NotFound';
+import './App.css';
 
 function App() {
    return (
@@ -10,7 +10,7 @@ function App() {
          <Router>
             <Routes>
                <Route path="/" element={<TodoList />} />
-               <Route path="/todo/:id" element={<TodoDescrption />} />
+               <Route path="/todo/:id" element={<TodoEditing />} />
                <Route path="*" element={<NotFound />} />
             </Routes>
          </Router>

@@ -1,25 +1,41 @@
-import { useParams, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState, useCallback } from 'react';
 import { Todo as TodoType } from '../types';
-import { useNavigate } from 'react-router-dom';
 import { ref, update } from 'firebase/database';
 import { db } from '../firebase';
 
-const TodoDescription = () => {
-   const { id } = useParams();
+const TodoEditing = () => {
+   const { id } = useParams<{ id: string }>();
    const location = useLocation();
-   const [todo, setTodo] = useState<TodoType | null>(null);
-   const [error, setError] = useState<string | null>(null);
    const navigate = useNavigate();
 
-   const updateTodo = async (id: string, updatedTodo: TodoType) => {
+   const [todo, setTodo] = useState<TodoType | null>(null);
+   const [error, setError] = useState<string | null>(null);
+
+   const updateTodo = useCallback(async (id: string, updatedTodo: TodoType) => {
       const todoRef = ref(db, `todoList/${id}`);
       try {
          await update(todoRef, updatedTodo);
       } catch (error) {
          console.error('Error updating todo:', error);
+         throw error;
       }
-   };
+   }, []);
+
+   const applyChanges = useCallback(
+      async (e: React.FormEvent<HTMLFormElement>) => {
+         e.preventDefault();
+         if (id && todo) {
+            try {
+               await updateTodo(id, todo);
+               navigate('/');
+            } catch {
+               setError('Failed to update the task. Please try again.');
+            }
+         }
+      },
+      [id, todo, updateTodo, navigate]
+   );
 
    useEffect(() => {
       if (location.state && location.state.todo) {
@@ -30,18 +46,6 @@ const TodoDescription = () => {
    if (!todo) {
       return <p className="text-white">Task not found</p>;
    }
-
-   const applyChanges = async (e: React.FormEvent) => {
-      e.preventDefault();
-      if (id && todo) {
-         try {
-            await updateTodo(id, todo);
-            navigate('/');
-         } catch (error) {
-            setError('Failed to update the task. Please try again.');
-         }
-      }
-   };
 
    return (
       <div className="w-[500px] bg-slate-200 mt-36 p-8  rounded-md border-solid border-black border-2">
@@ -73,4 +77,4 @@ const TodoDescription = () => {
    );
 };
 
-export default TodoDescription;
+export default TodoEditing;

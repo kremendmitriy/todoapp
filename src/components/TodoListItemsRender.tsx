@@ -2,22 +2,21 @@ import Todo from './Todo';
 import Search from './Search';
 import Sort from './Sort';
 import '../styles/loader.css';
-
 import { Todo as TodoType } from '../types';
 import { useState } from 'react';
 
-import UseRequestDeleteTodo from '../hooks/use-request-delete-todo';
+import useRequestDeleteTodo from '../hooks/use-request-delete-todo';
 import useRequestGetTodoList from '../hooks/use-request-get-todoList';
-import UseRequestSearchTodo from '../hooks/use-request-search-todo';
+import useRequestSearchTodo from '../hooks/use-request-search-todo';
 import useRequestSortTodo from '../hooks/use-request-sort-todo';
 
 const TodoListItemsRender = () => {
-   const { deleteTodo } = UseRequestDeleteTodo();
+   const { deleteTodo } = useRequestDeleteTodo();
    const { todoList, isLoading } = useRequestGetTodoList();
-   const { findTodo, searchResult } = UseRequestSearchTodo();
+   const { findTodo, searchResult } = useRequestSearchTodo();
 
    const [isSearching, setIsSearching] = useState(false);
-   const [sortOption, setSortOption] = useState<string>('a-z');
+   const [sortOption, setSortOption] = useState<'a-z' | 'z-a'>('a-z');
 
    const handleSearch = (value: string) => {
       findTodo(value);
